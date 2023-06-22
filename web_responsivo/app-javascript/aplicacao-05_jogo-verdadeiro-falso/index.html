@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>VF</title>
+</head>
+<body>
+
+    <div class="container-fluid p-1 bg-primary text-white text-center">
+        <h1>Verdadeiro ou Falso</h1>
+        <p>Jogo de perguntas e respostas</p> 
+    </div>
+
+    <div class="container mt-1">
+
+        <div id="painel" class="mt-3">
+            Acertos:<br><input type="text" id="acertos" value="0" readonly>
+            <br><br>
+            Erros:<br><input type="text" id="erros" value="0" readonly>
+            <input type="hidden" id="n_quest" value="0">
+        </div>
+        <div id="enunciado" class="mt-3 alert alert-primary"></div>
+        <div id="botoes" class="mt-3">
+            <a href="javascript:verifica(1)" class="btn btn-success">Verdadeiro</a>
+            <a href="javascript:verifica(0)" class="btn btn-danger">Falso</a>
+            <a href="javascript:reiniciar()" class="btn btn-secondary">Reiniciar</a>
+        </div>
+
+        <script>
+
+            const enunciado = [
+                  "Pedro Alvares Cabral descobriu o Brasil."
+                , "O Cristo Redentor fica em Minas Gerais."
+                , "A capital do Brasil é Buenos Aires."
+                , "Pedro Alvares Cabral descobriu o Chile."
+                , "O Cristo Redentor fica no Rio de Janeiro."
+                , "A capital do Brasil é Brasília."
+                , "2+2=4"
+                , "2+2=5"
+                , "O Estado de SP fica na região Sul."
+                , "O Estado de SP fica na região Sudeste."
+                , "Cobra cega é um réptil."
+                , "Cobra cega é um anfíbio."
+                , "O morcego é um animal mamífero"
+                , "O morcego é um pássaro"
+                , "O golfinho é um animal mamífero"
+                , "O golfinho é um peixe"
+                , "A Mongólia faz fronteira com a Russia"
+                , "A Mongólia faz fronteira com a China"
+                , "9x8=72"
+                , "9x9=76"
+            ];
+            const resposta = [1,0,0,0,1,1,1,0,0,1,0,1,1,0,1,0,1,1,1,0];
+            
+            n_quest = Math.floor(Math.random() * enunciado.length);
+            document.getElementById("n_quest").value = n_quest;
+            document.getElementById("enunciado").innerHTML = enunciado[n_quest];
+
+            function verifica(num){
+                n_quest = document.getElementById("n_quest").value;
+                if(resposta[n_quest]==num){
+                    acertos = parseInt(document.getElementById("acertos").value);
+                    document.getElementById("acertos").value = acertos + 1;
+                } else {
+                    erros = parseInt(document.getElementById("erros").value);
+                    document.getElementById("erros").value = erros + 1;
+                }
+                n_quest = Math.floor(Math.random() * enunciado.length);
+                document.getElementById("n_quest").value = n_quest;
+                document.getElementById("enunciado").innerHTML = enunciado[n_quest];
+            }
+
+            function reiniciar(){
+                document.getElementById("acertos").value = 0;
+                document.getElementById("erros").value = 0;
+                n_quest = Math.floor(Math.random() * enunciado.length);
+                document.getElementById("n_quest").value = n_quest;
+                document.getElementById("enunciado").innerHTML = enunciado[n_quest];
+            }
+        </script>
+
+    </div>
+    <br>
+</body>
+</html>
